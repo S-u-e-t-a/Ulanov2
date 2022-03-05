@@ -196,6 +196,13 @@ namespace OpenTK_WPF
         }
 
 
+        public void SetLighterPosition(Vector3 pos)
+        {
+            _lightPos = pos;
+            GLControl_Paint(null,null);
+        }
+
+
         /// <summary>
         ///     MainWindow.xaml 的交互逻辑
         /// </summary>
@@ -249,7 +256,7 @@ namespace OpenTK_WPF
             -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f
         };
 
-        private readonly Vector3 _lightPos = new Vector3(1.2f, 1.0f, 2.0f);
+        private  Vector3 _lightPos = new Vector3(1.2f, 1.0f, 2.0f);
 
         private int _vertexBufferObject;
 

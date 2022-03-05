@@ -19,5 +19,73 @@
             <opentk:GLControl x:Name="_glControl" Load="GLControl_Load" Paint="GLControl_Paint"  Resize="_glControl_Resize"
                               PreviewKeyDown="_glControl_OnKeyDown"></opentk:GLControl>
         </WindowsFormsHost>
+        <Grid Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="150"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"> Положение источника света</Label>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label x:Name="lighterXLabel"/>
+                <Label x:Name="lighterYLabel"/>
+                <Label x:Name="lighterZLabel"/>
+                <Slider x:Name="lighterXSlider"
+                    Minimum="-2" Maximum="2"
+                        Grid.Row="1" Grid.Column="0" 
+                        Orientation="Vertical"
+                        HorizontalAlignment="Center" />
+                <Slider x:Name="lighterYSlider"
+                        Minimum="-2" Maximum="2"
+                        Grid.Row="1" Grid.Column="1" 
+                        Orientation="Vertical"
+                        HorizontalAlignment="Center"/>
+                <Slider x:Name="lighterZSlider"
+                        Minimum="-2" Maximum="2"
+                        Grid.Row="1" Grid.Column="2" 
+                        Orientation="Vertical"
+                        HorizontalAlignment="Center"/>
+            </Grid>
+            <Label Grid.Row="2">Положение куба</Label>
+            <Grid Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label x:Name="cubeXLabel"/>
+                <Label x:Name="cubeYLabel"/>
+                <Label x:Name="cubeZLabel"/>
+                <Slider x:Name="cubeXSlider"
+                        Minimum="-2" Maximum="2"
+                        Grid.Row="1" Grid.Column="0" 
+                        Orientation="Vertical"
+                        HorizontalAlignment="Center" />
+                <Slider x:Name="cubeYSlider"
+                        Minimum="-2" Maximum="2"
+                        Grid.Row="1" Grid.Column="1" 
+                        Orientation="Vertical"
+                        HorizontalAlignment="Center"/>
+                <Slider x:Name="cubeZSlider"
+                        Minimum="-2" Maximum="2"
+                        Grid.Row="1" Grid.Column="2" 
+                        Orientation="Vertical"
+                        HorizontalAlignment="Center"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

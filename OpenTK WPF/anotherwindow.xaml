@@ -1,0 +1,61 @@
+﻿<Window x:Class="OpenTK_WPF.anotherwindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:opentk="clr-namespace:OpenTK;assembly=OpenTK.GLControl"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800">
+    <Grid>
+        <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="500" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="500" />
+                    </Grid.RowDefinitions>
+                    <WindowsFormsHost>
+                        <opentk:GLControl x:Name="_glControl" Load="GLControl_Load" Paint="GLControl_Paint"
+                                          Resize="_glControl_Resize"
+                                          PreviewKeyDown="_glControl_OnKeyDown" />
+                    </WindowsFormsHost>
+                    <Grid Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="150" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0">Положение источника света</Label>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Label x:Name="lighterXLabel" />
+                            <Label x:Name="lighterYLabel" />
+                            <Label x:Name="lighterZLabel" />
+                            <Slider ValueChanged="LighterXSlider_OnValueChanged" x:Name="lighterXSlider"
+                                    Minimum="-2" Maximum="2"
+                                    Grid.Row="1" Grid.Column="0"
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center" />
+                            <Slider ValueChanged="LighterYSlider_OnValueChanged" x:Name="lighterYSlider"
+                                    Minimum="-2" Maximum="2"
+                                    Grid.Row="1" Grid.Column="1"
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center" />
+                            <Slider ValueChanged="LighterZSlider_OnValueChanged" x:Name="lighterZSlider"
+                                    Minimum="-2" Maximum="2"
+                                    Grid.Row="1" Grid.Column="2"
+                                    Orientation="Vertical"
+                                    HorizontalAlignment="Center" />
+                        </Grid>
+                    </Grid>
+                </Grid>
+    </Grid>
+</Window>

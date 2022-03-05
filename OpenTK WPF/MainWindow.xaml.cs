@@ -31,6 +31,13 @@ namespace OpenTK_WPF
         }
 
 
+        public void SetLighterPosition(Vector3 pos)
+        {
+            _lightPos = pos;
+            GLControl_Paint(null, null);
+        }
+
+
         protected void OnUnload(EventArgs e)
         {
             TraceMessage("");
@@ -172,22 +179,22 @@ namespace OpenTK_WPF
                 _camera.Position -= _camera.Up * cameraSpeed; // * (float) e.Time; // Down
             }
 
-            if (input == Keys.Left)
+            if (input == Keys.NumPad1)
             {
                 _camera.Yaw -= sensitivity;
             }
 
-            if (input == Keys.Right)
+            if (input == Keys.NumPad3)
             {
                 _camera.Yaw += sensitivity;
             }
 
-            if (input == Keys.Up)
+            if (input == Keys.NumPad5)
             {
                 _camera.Pitch += sensitivity;
             }
 
-            if (input == Keys.Down)
+            if (input == Keys.NumPad2)
             {
                 _camera.Pitch -= sensitivity;
             }
@@ -196,10 +203,30 @@ namespace OpenTK_WPF
         }
 
 
-        public void SetLighterPosition(Vector3 pos)
+        private void LighterXSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            _lightPos = pos;
-            GLControl_Paint(null,null);
+            var newValue = (float) lighterXSlider.Value;
+            var oldpos = _lightPos;
+            oldpos.X = newValue;
+            SetLighterPosition(oldpos);
+        }
+
+
+        private void LighterYSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var newValue = (float) lighterYSlider.Value;
+            var oldpos = _lightPos;
+            oldpos.Y = newValue;
+            SetLighterPosition(oldpos);
+        }
+
+
+        private void LighterZSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var newValue = (float) lighterZSlider.Value;
+            var oldpos = _lightPos;
+            oldpos.Z = newValue;
+            SetLighterPosition(oldpos);
         }
 
 
@@ -256,7 +283,7 @@ namespace OpenTK_WPF
             -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f
         };
 
-        private  Vector3 _lightPos = new Vector3(1.2f, 1.0f, 2.0f);
+        private Vector3 _lightPos = new Vector3(1.2f, 1.0f, 2.0f);
 
         private int _vertexBufferObject;
 

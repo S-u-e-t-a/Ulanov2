@@ -7,55 +7,61 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="800">
     <Grid>
+
         <Grid>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="500" />
+            </Grid.RowDefinitions>
+            <Menu Grid.ColumnSpan="2">
+                <MenuItem Header="О программе" Click="MenuItem_Click"></MenuItem>
+            </Menu>
+            <WindowsFormsHost Grid.Row="1">
+                <opentk:GLControl x:Name="_glControl" Load="GLControl_Load" Paint="GLControl_Paint"
+                                          Resize="_glControl_Resize"
+                                          PreviewKeyDown="_glControl_OnKeyDown" />
+            </WindowsFormsHost>
+            <Grid Column="1" Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="150" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0">Положение источника света</Label>
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="500" />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="500" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                    <WindowsFormsHost>
-                        <opentk:GLControl x:Name="_glControl" Load="GLControl_Load" Paint="GLControl_Paint"
-                                          Resize="_glControl_Resize"
-                                          PreviewKeyDown="_glControl_OnKeyDown" />
-                    </WindowsFormsHost>
-                    <Grid Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="150" />
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0">Положение источника света</Label>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Label x:Name="lighterXLabel" />
-                            <Label x:Name="lighterYLabel" />
-                            <Label x:Name="lighterZLabel" />
-                            <Slider ValueChanged="LighterXSlider_OnValueChanged" x:Name="lighterXSlider"
+                    <Label x:Name="lighterXLabel" />
+                    <Label x:Name="lighterYLabel" />
+                    <Label x:Name="lighterZLabel" />
+                    <Slider ValueChanged="LighterXSlider_OnValueChanged" x:Name="lighterXSlider"
                                     Minimum="-2" Maximum="2"
                                     Grid.Row="1" Grid.Column="0"
                                     Orientation="Vertical"
                                     HorizontalAlignment="Center" />
-                            <Slider ValueChanged="LighterYSlider_OnValueChanged" x:Name="lighterYSlider"
+                    <Slider ValueChanged="LighterYSlider_OnValueChanged" x:Name="lighterYSlider"
                                     Minimum="-2" Maximum="2"
                                     Grid.Row="1" Grid.Column="1"
                                     Orientation="Vertical"
                                     HorizontalAlignment="Center" />
-                            <Slider ValueChanged="LighterZSlider_OnValueChanged" x:Name="lighterZSlider"
+                    <Slider ValueChanged="LighterZSlider_OnValueChanged" x:Name="lighterZSlider"
                                     Minimum="-2" Maximum="2"
                                     Grid.Row="1" Grid.Column="2"
                                     Orientation="Vertical"
                                     HorizontalAlignment="Center" />
-                        </Grid>
-                    </Grid>
                 </Grid>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

@@ -15,7 +15,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="500" />
                     </Grid.RowDefinitions>
-                    <WindowsFormsHost>
+            <WindowsFormsHost>
                         <opentk:GLControl x:Name="_glControl" Load="GLControl_Load" Paint="GLControl_Paint"
                                           Resize="_glControl_Resize"
                                           PreviewKeyDown="_glControl_OnKeyDown" />

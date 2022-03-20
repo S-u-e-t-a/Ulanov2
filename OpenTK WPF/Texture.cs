@@ -1,7 +1,9 @@
-﻿using OpenTK.Graphics.OpenGL4;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Imaging;
-using PixelFormat = OpenTK.Graphics.OpenGL4.PixelFormat;
+
+using OpenTK.Graphics.OpenGL4;
+
+using PixelFormat = System.Drawing.Imaging.PixelFormat;
 
 namespace LearnOpenTK.Common
 {
@@ -10,10 +12,17 @@ namespace LearnOpenTK.Common
     {
         public readonly int Handle;
 
+
+        public Texture(int glHandle)
+        {
+            Handle = glHandle;
+        }
+
+
         public static Texture LoadFromFile(string path)
         {
             // Generate handle
-            int handle = GL.GenTexture();
+            var handle = GL.GenTexture();
 
             // Bind the handle
             GL.ActiveTexture(TextureUnit.Texture0);
@@ -39,7 +48,7 @@ namespace LearnOpenTK.Common
                 var data = image.LockBits(
                     new Rectangle(0, 0, image.Width, image.Height),
                     ImageLockMode.ReadOnly,
-                    System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                    PixelFormat.Format32bppArgb);
 
                 // Now that our pixels are prepared, it's time to generate a texture. We do this with GL.TexImage2D.
                 // Arguments:
@@ -58,7 +67,7 @@ namespace LearnOpenTK.Common
                     image.Width,
                     image.Height,
                     0,
-                    PixelFormat.Bgra,
+                    OpenTK.Graphics.OpenGL4.PixelFormat.Bgra,
                     PixelType.UnsignedByte,
                     data.Scan0);
             }
@@ -70,13 +79,13 @@ namespace LearnOpenTK.Common
             // You could also use (amongst other options) Nearest, which just grabs the nearest pixel, which makes the texture look pixelated if scaled too far.
             // NOTE: The default settings for both of these are LinearMipmap. If you leave these as default but don't generate mipmaps,
             // your image will fail to render at all (usually resulting in pure black instead).
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Linear);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) TextureMinFilter.Linear);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int) TextureMagFilter.Linear);
 
             // Now, set the wrapping mode. S is for the X axis, and T is for the Y axis.
             // We set this to Repeat so that textures will repeat when wrapped. Not demonstrated here since the texture coordinates exactly match
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int) TextureWrapMode.Repeat);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int) TextureWrapMode.Repeat);
 
             // Next, generate mipmaps.
             // Mipmaps are smaller copies of the texture, scaled down. Each mipmap level is half the size of the previous one
@@ -90,10 +99,6 @@ namespace LearnOpenTK.Common
             return new Texture(handle);
         }
 
-        public Texture(int glHandle)
-        {
-            Handle = glHandle;
-        }
 
         // Activate texture
         // Multiple textures can be bound, if your shader needs more than just one.

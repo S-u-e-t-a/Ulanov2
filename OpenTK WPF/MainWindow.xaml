@@ -15,14 +15,18 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
                 <RowDefinition Height="500" />
             </Grid.RowDefinitions>
-            <WindowsFormsHost>
+            <Menu Grid.ColumnSpan="2">
+                <MenuItem Header="О программе" Click="MenuItem_Click" />
+            </Menu>
+            <WindowsFormsHost Grid.Row="1">
                 <opentk:GLControl x:Name="_glControl" Load="GLControl_Load" Paint="GLControl_Paint"
                                   Resize="_glControl_Resize"
                                   PreviewKeyDown="_glControl_OnKeyDown" />
             </WindowsFormsHost>
-            <Grid Column="1">
+            <Grid Column="1" Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
                     <RowDefinition />

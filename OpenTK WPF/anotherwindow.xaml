@@ -9,6 +9,7 @@
         Title="MainWindow" Height="600" Width="800"
         DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="500" />

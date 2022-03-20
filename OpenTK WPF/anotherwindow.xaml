@@ -4,58 +4,108 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:opentk="clr-namespace:OpenTK;assembly=OpenTK.GLControl"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="800"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}">
     <Grid>
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="500" />
+            </Grid.RowDefinitions>
+            <WindowsFormsHost>
+                <opentk:GLControl Height="500" Width="500" x:Name="_glControl" Load="GLControl_Load" Paint="GLControl_Paint"
+                                  Resize="_glControl_Resize"
+                                  PreviewKeyDown="_glControl_OnKeyDown" />
+            </WindowsFormsHost>
+            <Grid Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition />
+                    <RowDefinition Height="30" />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0">Координаты камеры </Label>
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="500" />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="500" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
-                    <WindowsFormsHost>
-                        <opentk:GLControl x:Name="_glControl" Load="GLControl_Load" Paint="GLControl_Paint"
-                                          Resize="_glControl_Resize"
-                                          PreviewKeyDown="_glControl_OnKeyDown" />
-                    </WindowsFormsHost>
-                    <Grid Column="1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="150" />
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0">Положение источника света</Label>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Label x:Name="lighterXLabel" />
-                            <Label x:Name="lighterYLabel" />
-                            <Label x:Name="lighterZLabel" />
-                            <Slider ValueChanged="LighterXSlider_OnValueChanged" x:Name="lighterXSlider"
-                                    Minimum="-2" Maximum="2"
-                                    Grid.Row="1" Grid.Column="0"
-                                    Orientation="Vertical"
-                                    HorizontalAlignment="Center" />
-                            <Slider ValueChanged="LighterYSlider_OnValueChanged" x:Name="lighterYSlider"
-                                    Minimum="-2" Maximum="2"
-                                    Grid.Row="1" Grid.Column="1"
-                                    Orientation="Vertical"
-                                    HorizontalAlignment="Center" />
-                            <Slider ValueChanged="LighterZSlider_OnValueChanged" x:Name="lighterZSlider"
-                                    Minimum="-2" Maximum="2"
-                                    Grid.Row="1" Grid.Column="2"
-                                    Orientation="Vertical"
-                                    HorizontalAlignment="Center" />
-                        </Grid>
-                    </Grid>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="X" />
+                        <xctk:SingleUpDown Value="{Binding Path=CameraPostionX, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FormatString="F3" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Y" />
+                        <xctk:SingleUpDown Value="{Binding Path=CameraPostionY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FormatString="F3"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Z" />
+                        <xctk:SingleUpDown Value="{Binding Path=CameraPostionZ, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FormatString="F3"/>
+                    </StackPanel>
+                    <Slider Value="{Binding Path=CameraPostionX, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="cameraXSlider"
+                            Minimum="-20" Maximum="20"
+                            Grid.Row="1" Grid.Column="0"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Center" />
+                    <Slider Value="{Binding Path=CameraPostionY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="cameraYSlider"
+                            Minimum="-20" Maximum="20"
+                            Grid.Row="1" Grid.Column="1"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Center" />
+                    <Slider Value="{Binding Path=CameraPostionZ, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="cameraZSlider"
+                            Minimum="-20" Maximum="20"
+                            Grid.Row="1" Grid.Column="2"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Center" />
                 </Grid>
+                <Label Grid.Row="2">Углы камеры</Label>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Тангаж" />
+                        <xctk:SingleUpDown FormatString="F3"
+                                           Value="{Binding Path=CameraPitch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Рыскание" />
+                        <xctk:SingleUpDown FormatString="F3"
+                                           Value="{Binding Path=CameraYaw, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </StackPanel>
+
+                    
+                    <Slider Value="{Binding Path=CameraPitch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="cameraPitchSlider"
+                            Minimum="-180" Maximum="180"
+                            Grid.Row="1" Grid.Column="0"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Center" />
+                    <Slider Value="{Binding Path=CameraYaw, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="cameraYawSlider"
+                            Minimum="-180" Maximum="180"
+                            Grid.Row="1" Grid.Column="1"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Center" />
+                </Grid>
+                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="Изометрия" Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="56" Width="112" />
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

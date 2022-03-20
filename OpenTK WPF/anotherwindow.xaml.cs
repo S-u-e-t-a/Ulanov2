@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -11,12 +12,86 @@ using OpenTK.Graphics.OpenGL;
 
 namespace OpenTK_WPF
 {
-    public partial class anotherwindow : Window
+    public partial class anotherwindow : Window, INotifyPropertyChanged
     {
+        public float CameraPitch
+        {
+            get { return _camera.Pitch; }
+            set
+            {
+                _camera.Pitch = value;
+                OnPropertyChanged();
+                GLControl_Paint(null, null);
+            }
+        }
+
+        public float CameraPostionX
+        {
+            get { return _camera.Position.X; }
+            set
+            {
+                CameraPostion = new Vector3(value, CameraPostion.Y, CameraPostion.Z);
+                OnPropertyChanged();
+                GLControl_Paint(null, null);
+            }
+        }
+
+        public float CameraPostionY
+        {
+            get { return _camera.Position.Y; }
+            set
+            {
+                CameraPostion = new Vector3(CameraPostion.X, value, CameraPostion.Z);
+                OnPropertyChanged();
+                GLControl_Paint(null, null);
+            }
+        }
+
+        public float CameraPostionZ
+        {
+            get { return _camera.Position.Z; }
+            set
+            {
+                CameraPostion = new Vector3(CameraPostion.X, CameraPostion.Y, value);
+                OnPropertyChanged();
+                GLControl_Paint(null, null);
+            }
+        }
+
+        public float CameraYaw
+        {
+            get { return _camera.Yaw; }
+            set
+            {
+                _camera.Yaw = value;
+                OnPropertyChanged();
+                GLControl_Paint(null, null);
+            }
+        }
+
+        public Vector3 CameraPostion
+        {
+            get { return _camera.Position; }
+            set
+            {
+                _camera.Position = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CameraPostionX));
+                OnPropertyChanged(nameof(CameraPostionY));
+                OnPropertyChanged(nameof(CameraPostionZ));
+                GLControl_Paint(null, null);
+            }
+        }
+
+
         public anotherwindow()
         {
+            _camera = new Camera(new Vector3(0), 0); // лютый костыль но шо поделать
             InitializeComponent();
         }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
 
         public void TraceMessage(string message,
@@ -28,6 +103,15 @@ namespace OpenTK_WPF
             Trace.WriteLine("member name: " + memberName);
             Trace.WriteLine("source file path: " + sourceFilePath);
             Trace.WriteLine("source line number: " + sourceLineNumber);
+        }
+
+
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            }
         }
 
 
@@ -142,70 +226,63 @@ namespace OpenTK_WPF
 
             if (input == Keys.W)
             {
-                _camera.Position += _camera.Front * cameraSpeed; // * (float) e.Time; // Forward
+                CameraPostion += _camera.Front * cameraSpeed; // * (float) e.Time; // Forward
             }
 
             if (input == Keys.S)
             {
-                _camera.Position -= _camera.Front * cameraSpeed; // * (float) e.Time; // Backwards
+                CameraPostion -= _camera.Front * cameraSpeed; // * (float) e.Time; // Backwards
             }
 
             if (input == Keys.A)
             {
-                _camera.Position -= _camera.Right * cameraSpeed; // * (float) e.Time; // Left
+                CameraPostion -= _camera.Right * cameraSpeed; // * (float) e.Time; // Left
             }
 
             if (input == Keys.D)
             {
-                _camera.Position += _camera.Right * cameraSpeed; // * (float) e.Time; // Right
+                CameraPostion += _camera.Right * cameraSpeed; // * (float) e.Time; // Right
             }
 
             if (input == Keys.Space)
             {
-                _camera.Position += _camera.Up * cameraSpeed; // * (float) e.Time; // Up
+                CameraPostion += _camera.Up * cameraSpeed; // * (float) e.Time; // Up
             }
 
             if (input == Keys.LShiftKey)
             {
-                _camera.Position -= _camera.Up * cameraSpeed; // * (float) e.Time; // Down
+                CameraPostion -= _camera.Up * cameraSpeed; // * (float) e.Time; // Down
             }
 
             if (input == Keys.NumPad1)
             {
-                _camera.Yaw -= sensitivity;
+                CameraYaw -= sensitivity;
             }
 
             if (input == Keys.NumPad3)
             {
-                _camera.Yaw += sensitivity;
+                CameraYaw += sensitivity;
             }
 
             if (input == Keys.NumPad5)
             {
-                _camera.Pitch += sensitivity;
+                CameraPitch += sensitivity;
             }
 
             if (input == Keys.NumPad2)
             {
-                _camera.Pitch -= sensitivity;
+                CameraPitch -= sensitivity;
             }
 
-            GLControl_Paint(null, null);
+            //GLControl_Paint(null, null);
         }
 
 
-        private void LighterXSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-        }
-
-
-        private void LighterYSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-        }
-
-
-        private void LighterZSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
+            CameraPitch = -45;
+            CameraYaw = -135;
+            CameraPostion = new Vector3(2);
         }
 
 

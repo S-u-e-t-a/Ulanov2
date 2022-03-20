@@ -18,7 +18,8 @@
                 <RowDefinition Height="500" />
             </Grid.RowDefinitions>
             <WindowsFormsHost>
-                <opentk:GLControl Height="500" Width="500" x:Name="_glControl" Load="GLControl_Load" Paint="GLControl_Paint"
+                <opentk:GLControl Height="500" Width="500" x:Name="_glControl" Load="GLControl_Load"
+                                  Paint="GLControl_Paint"
                                   Resize="_glControl_Resize"
                                   PreviewKeyDown="_glControl_OnKeyDown" />
             </WindowsFormsHost>
@@ -43,27 +44,36 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Content="X" />
-                        <xctk:SingleUpDown Value="{Binding Path=CameraPostionX, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FormatString="F3" />
+                        <xctk:SingleUpDown
+                            Value="{Binding Path=CameraPostionX, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            FormatString="F3" />
                     </StackPanel>
                     <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Content="Y" />
-                        <xctk:SingleUpDown Value="{Binding Path=CameraPostionY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FormatString="F3"/>
+                        <xctk:SingleUpDown
+                            Value="{Binding Path=CameraPostionY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            FormatString="F3" />
                     </StackPanel>
                     <StackPanel Grid.Row="0" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Content="Z" />
-                        <xctk:SingleUpDown Value="{Binding Path=CameraPostionZ, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" FormatString="F3"/>
+                        <xctk:SingleUpDown
+                            Value="{Binding Path=CameraPostionZ, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            FormatString="F3" />
                     </StackPanel>
-                    <Slider Value="{Binding Path=CameraPostionX, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="cameraXSlider"
+                    <Slider Value="{Binding Path=CameraPostionX, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            x:Name="cameraXSlider"
                             Minimum="-20" Maximum="20"
                             Grid.Row="1" Grid.Column="0"
                             Orientation="Vertical"
                             HorizontalAlignment="Center" />
-                    <Slider Value="{Binding Path=CameraPostionY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="cameraYSlider"
+                    <Slider Value="{Binding Path=CameraPostionY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            x:Name="cameraYSlider"
                             Minimum="-20" Maximum="20"
                             Grid.Row="1" Grid.Column="1"
                             Orientation="Vertical"
                             HorizontalAlignment="Center" />
-                    <Slider Value="{Binding Path=CameraPostionZ, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="cameraZSlider"
+                    <Slider Value="{Binding Path=CameraPostionZ, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            x:Name="cameraZSlider"
                             Minimum="-20" Maximum="20"
                             Grid.Row="1" Grid.Column="2"
                             Orientation="Vertical"
@@ -90,20 +100,24 @@
                                            Value="{Binding Path=CameraYaw, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                     </StackPanel>
 
-                    
-                    <Slider Value="{Binding Path=CameraPitch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="cameraPitchSlider"
+
+                    <Slider Value="{Binding Path=CameraPitch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            x:Name="cameraPitchSlider"
                             Minimum="-180" Maximum="180"
                             Grid.Row="1" Grid.Column="0"
                             Orientation="Vertical"
                             HorizontalAlignment="Center" />
-                    <Slider Value="{Binding Path=CameraYaw, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" x:Name="cameraYawSlider"
+                    <Slider Value="{Binding Path=CameraYaw, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            x:Name="cameraYawSlider"
                             Minimum="-180" Maximum="180"
                             Grid.Row="1" Grid.Column="1"
                             Orientation="Vertical"
                             HorizontalAlignment="Center" />
                 </Grid>
-                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Content="Изометрия" Click="Button_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Height="56" Width="112" />
+                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                    <Button Content="Изометрия" Click="Button_Click" HorizontalAlignment="Center"
+                            VerticalAlignment="Center" Height="56" Width="112" />
                 </StackPanel>
             </Grid>
         </Grid>

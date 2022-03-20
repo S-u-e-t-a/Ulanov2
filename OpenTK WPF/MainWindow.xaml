@@ -28,7 +28,7 @@
                     <RowDefinition />
                     <RowDefinition Height="30" />
                     <RowDefinition />
-                    <RowDefinition  Height="30"/>
+                    <RowDefinition Height="30" />
                     <RowDefinition />
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
@@ -163,9 +163,10 @@
                             Orientation="Vertical"
                             HorizontalAlignment="Center" />
                 </Grid>
-                <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
                     <Button Content="Изометрия" Click="Button_Click" Height="32" Width="92" />
-                    </StackPanel>
+                </StackPanel>
 
             </Grid>
         </Grid>

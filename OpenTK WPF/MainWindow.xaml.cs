@@ -282,12 +282,12 @@ namespace OpenTK_WPF
                 CameraPostion += _camera.Right * cameraSpeed; // * (float) e.Time; // Right
             }
 
-            if (input == Keys.Space)
+            if (input == Keys.E)
             {
                 CameraPostion += _camera.Up * cameraSpeed; // * (float) e.Time; // Up
             }
 
-            if (input == Keys.LShiftKey)
+            if (input == Keys.Q)
             {
                 CameraPostion -= _camera.Up * cameraSpeed; // * (float) e.Time; // Down
             }

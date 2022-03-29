@@ -11,7 +11,7 @@ using OpenTK;
 using OpenTK.Graphics.OpenGL;
 using MessageBox = System.Windows.Forms.MessageBox;
 
-using MessageBox = System.Windows.Forms.MessageBox;
+
 
 namespace OpenTK_WPF
 {
@@ -367,21 +367,6 @@ namespace OpenTK_WPF
 
         #endregion
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("3D куб в центре координат. \n"
-                            + "Авторы: Хлебников Роман, Гусев Антон, Ермаков Даниил, Кувылькин Андрей, Трифонов Юрий \n"
-                            + "Управление камерой: \n" +
-                            "W - вперед \n" +
-                            "S - назад \n" +
-                            "A - влево \n" +
-                            "D - вправо \n" +
-                            "Пробел - вверх \n" +
-                            "Левый ctrl - вниз \n" +
-                            "Кпопки нумпада 1 и 3 - вращение против часовой и по часовой стрелке \n" +
-                            "Кпопки нумпада 2 и 5 - вращение вниз и вверх \n", "О программе");
-
-
-        }
+        
     }
 }
